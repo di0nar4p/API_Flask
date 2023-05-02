@@ -8,11 +8,6 @@ app = Flask(__name__)
 
 
 
-
-
-
-
-
 """ @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -24,7 +19,7 @@ def index():
 
 """ @app.route('/dados', methods=['GET'])
 def getAll():
-    dados = select_all('root','5550123Pl@y')
+    dados = select_all()
       
     return jsonify(dados) """
     
