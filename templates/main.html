@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <script src="{{url_for('static', filename='scripts.js')}}"></script>
+
     <title>Document</title>
 </head>
-<body >
-<table border="1">
+<body id="main">
+<table>
   <thead>
     <tr>
       <th>id</th>
@@ -21,25 +24,25 @@
     {%for dicionario in dados%}
    
     <tr>
-      <td>
-        
-        {{dicionario['id']}}
+      <td id="id">
+     
+        {{dicionario[0]}}
       </td>
-      <td>
+      <td id="nome">
         
-        {{dicionario['nome']}}
+        {{dicionario[1]}}
       </td>
-      <td>
+      <td id="idade">
         
-        {{dicionario['idade']}}
+        {{dicionario[2]}}
       </td>
-      <td>
+      <td id="nacional">
         
-        {{dicionario['nacionalidade']}}
+        {{dicionario[3]}}
       </td>
-      <td>
+      <td id="natural">
         
-        {{dicionario['naturalidade']}}
+        {{dicionario[4]}}
       </td>
      
     </tr>
@@ -47,6 +50,19 @@
 
     {%endfor %}
   </tbody>
-</table>
+  <tfoot>
+    <tr>
+      <td colspan="5">
+
+        <button type="button" onclick="callback()">Request</button></tr>
+      </td>
+
+    </tr>
+  </tfoot>
+    
+      
+    
+  </table>
+  <br>
 </body>
 </html>
