@@ -26,8 +26,3 @@ def select_all(user:str,password:str)-> list:
                             }
         request.append(dados) 
     return request
-""" 
-dados = select_all()
-
-for dado in dados:
-    print(dado) """
