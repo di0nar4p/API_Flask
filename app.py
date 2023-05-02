@@ -24,10 +24,10 @@ def index():
 
 """ @app.route('/dados', methods=['GET'])
 def getAll():
-    senha = request.form['senha']
-    user = request.form['login']
     dados = select_all('root','5550123Pl@y')
+      
     return jsonify(dados) """
+    
 
 
 """ @app.route('/dados/<int:id>', methods=['GET'])

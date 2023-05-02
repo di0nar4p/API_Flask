@@ -10,59 +10,57 @@
     <title>Document</title>
 </head>
 <body id="main">
-<table>
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>nome</th>
-      <th>idade</th>
-      <th>nacionalidade</th>
-      <th>naturalidade</th>
-    </tr>
-  </thead>
-  <tbody>
-    {%for dicionario in dados%}
-   
-    <tr>
-      <td id="id">
-     
-        {{dicionario[0]}}
-      </td>
-      <td id="nome">
-        
-        {{dicionario[1]}}
-      </td>
-      <td id="idade">
-        
-        {{dicionario[2]}}
-      </td>
-      <td id="nacional">
-        
-        {{dicionario[3]}}
-      </td>
-      <td id="natural">
-        
-        {{dicionario[4]}}
-      </td>
-     
-    </tr>
-   
+  <header>
+    <section>
 
-    {%endfor %}
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="5">
-
-        <button type="button" onclick="callback()">Request</button></tr>
-      </td>
-
-    </tr>
-  </tfoot>
-    
+      <table id="tabela">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Nacionalidade</th>
+            <th>Naturalidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for dado in dados%}
+         
+          <tr>
+            <td id="id">
+           
+              {{dado['id']}}
+            </td>
+            <td id="nome">
+              
+              {{dado['nome']}}
+            </td>
+            <td id="idade">
+              
+              {{dado['idade']}}
+            </td>
+            <td id="nacional">
+              
+              {{dado['nacionalidade']}}
+            </td>
+            <td id="natural">
+              
+              {{dado['naturalidade']}}
+            </td>
+           
+          </tr>
+         
       
-    
-  </table>
-  <br>
+          {%endfor %}
+        </tbody>
+        
+          
+            
+          
+        </table>
+        <br>
+    </section>
+
+  </header>
 </body>
 </html>

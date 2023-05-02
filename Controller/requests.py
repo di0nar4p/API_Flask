@@ -10,13 +10,24 @@ from Controller.conexao import db_connect
     registros = cursor.fetchall() """
     
     
-def select_all(user:str,senha:str)-> None:
+def select_all(user:str,password:str)-> list:
     query= (f'''SELECT * FROM dados''')
-    conn = db_connect(user,senha)
+    conn = db_connect(user,password)
     cursor = conn.cursor()
-
     cursor.execute(query)
-    registros = cursor.fetchall()
-    return list(registros)
+    registros= cursor.fetchall()
+    request=[]
+    for row in registros: 
+        dados={ 'id': row[0],
+                'nome':row[1],
+                'idade': row[2],
+                'nacionalidade':row[3],
+                'naturalidade': row[4]
+                            }
+        request.append(dados) 
+    return request
+""" 
+dados = select_all()
 
-
+for dado in dados:
+    print(dado) """
