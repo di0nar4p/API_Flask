@@ -17,11 +17,11 @@ def index():
     
 
 
-""" @app.route('/dados', methods=['GET'])
+@app.route('/dados', methods=['GET'])
 def getAll():
-    dados = select_all()
+    dados = select_all('root','5550123Pl@y')
       
-    return jsonify(dados) """
+    return jsonify(dados)
     
 
 
@@ -66,17 +66,26 @@ def index():
     if request.method == 'GET':
         return render_template('index.html')
 
-
+sessao= []
 @app.route('/home', methods=['GET','POST'])
 def main():
-    senha = request.form['senha']
-    user = request.form['login']
-    if db_connect(user,senha):
-        dados= select_all(user,senha)
-        response= dados
-        return render_template('main.html', dados=response)
+    
+    if sessao == []:
+        senha = request.form['senha']
+        user = request.form['login']
+        sessao.append(user)
+        sessao.append(senha)
+        dados= select_all(sessao[0],sessao[1])
+        return render_template('main.html', dados=dados)
+    
+    elif sessao != None and db_connect(sessao[0],sessao[1]):
+        dados= select_all(sessao[0],sessao[1])
+        return render_template('main.html', dados=dados)
 
-        
+@app.route('/logout')
+def logout():
+    sessao.clear()
+    return redirect(url_for('index'))        
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
