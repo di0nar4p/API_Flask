@@ -2,7 +2,7 @@
 
 API feita com Flask para fins de estudos, ainda não decidi qual será a finalidade dessa API, mas ja funciona <3.
 
-#Falta corrigir:
+# Falta corrigir:
 
 1- Tratamento de rotas, quando o usuário não acerta as credenciais ele retorna erro, vou tratar isso.
 
