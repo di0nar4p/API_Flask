@@ -19,7 +19,7 @@ def index():
 
 @app.route('/dados', methods=['GET'])
 def getAll():
-    dados = select_all('root','5550123Pl@y')
+    dados = select_all('senha do banco')
       
     return jsonify(dados)
     
