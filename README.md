@@ -9,3 +9,5 @@ API feita com Flask para fins de estudos, ainda não decidi qual será a finalid
 2- Criar uma página de cadastro para os usuários que desejam utilizar a API.
 
 3- Implementar formulários para manipulação dos dados.
+
+4- Colocar as credenciais no banco de dados (em parte feito, falta fazer commit).
