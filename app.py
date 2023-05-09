@@ -69,7 +69,7 @@ def index():
         return render_template('index.html')
 
 sessao= Session()
-
+""" 
 @app.route('/home', methods=['GET','POST'])
 def main():
     
@@ -88,7 +88,7 @@ def main():
                 return render_template('main.html', dados=dados)
     else:       
         return redirect(url_for('index'))
-    
+     """
     
     
 
