@@ -21,7 +21,7 @@ def index():
 
 @app.route('/dados', methods=['GET'])
 def getAll():
-    dados = select_all('u274908554_monitoriassa','INbdmonitoria01')
+    dados = select_all('senha do banco')
       
     return jsonify(dados)
     
@@ -29,7 +29,7 @@ def getAll():
 
 @app.route('/dados/<int:id>', methods=['GET'])
 def getId(id):
-    dados = select_all('u274908554_monitoriasssa','INbdmonitoria01')
+    dados = select_all('senha do banco')
     for dado in dados:
         if dado.get('id') == id:
             return jsonify(dado)
