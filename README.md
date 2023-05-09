@@ -1,6 +1,6 @@
 # API_Flask
 
-API feita com Flask para fins de estudos, ainda não decidi qual será a finalidade dessa API, mas ja funciona localmente <3.
+API feita com Flask para fins de estudos, ainda não decidi qual será a finalidade dessa API, mas ja funciona <3.
 
 # Falta corrigir:
 
@@ -11,3 +11,5 @@ API feita com Flask para fins de estudos, ainda não decidi qual será a finalid
 3- Implementar formulários para manipulação dos dados.
 
 4- Colocar as credenciais no banco de dados (em parte feito, falta fazer commit).
+
+5- Fazer lógica de sessão
