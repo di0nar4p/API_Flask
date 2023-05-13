@@ -1,6 +1,6 @@
 from flask import Flask, url_for, request, jsonify, render_template, abort, redirect
 from Controller.requests import select_all
-from Controller.conexao import db_connect
+from Controller.conexao import db_connect,local
 from Model.session import *
 from Model.user import *
 from templates import *
@@ -10,26 +10,21 @@ app = Flask(__name__)
 
 
 
-""" @app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        user = request.form['login']
-        senha = request.form['senha']
-        return acesso(user, senha) """
-    
 
 
+# retorna todos os dados
 @app.route('/dados', methods=['GET'])
 def getAll():
-    dados = select_all('credenciais do banco de dados')
+    dados = select_all()
       
     return jsonify(dados)
     
 
 
+# retorna dados pelo id
 @app.route('/dados/<int:id>', methods=['GET'])
 def getId(id):
-    dados = select_all('credenciais do banco de dados')
+    dados = select_all()
     for dado in dados:
         if dado.get('id') == id:
             return jsonify(dado)
@@ -63,6 +58,10 @@ def delete(id):
     return jsonify(dados) """
 
 
+
+
+
+# vou alterar a lógica
 @app.route('/', methods=['GET'])
 def index():
     if request.method == 'GET':
@@ -92,7 +91,7 @@ def main():
     
     
 
-
+# logout da api, vai ser alterado também
 @app.route('/logout')
 def logout():
     sessao.clear()

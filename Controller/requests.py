@@ -1,5 +1,4 @@
-from Controller.conexao import db_connect
-
+from Controller.conexao import db_connect, local
 
 """ def select_all(param:str)-> None:
     query= (f'''SELECT * FROM {param}''')
@@ -9,10 +8,13 @@ from Controller.conexao import db_connect
     cursor.execute(query)
     registros = cursor.fetchall() """
     
-    
-def select_all(user:str,password:str)-> list:
+
+
+# Requisição banco remoto
+def select_all()-> list:
     query= (f'''SELECT * FROM dados''')
-    conn = db_connect(user,password)
+    login,password= local()
+    conn = db_connect(login,password)
     cursor = conn.cursor()
     cursor.execute(query)
     registros= cursor.fetchall()
@@ -26,3 +28,7 @@ def select_all(user:str,password:str)-> list:
                             }
         request.append(dados) 
     return request
+
+
+
+
