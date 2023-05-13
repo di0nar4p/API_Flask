@@ -34,18 +34,7 @@ def dbl_connect(user:str,password:str) -> object:
         print('Sucessfully connected')
         return conn
 
-# Requisição de credencais
-def local():
-    access= ('SELECT * FROM credentials')
-    connlocal = dbl_connect('root', '5550123Pl@y')
-    cursor = connlocal.cursor()
-    cursor.execute(access)
-    credentials= cursor.fetchall()
-    acesso=[]
-    for credencial in credentials:
-        acesso.append(list(credencial))
-    
-    return acesso[0][0],acesso[0][1]
+
 
 
 

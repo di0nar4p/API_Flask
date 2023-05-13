@@ -1,6 +1,5 @@
 from flask import Flask, url_for, request, jsonify, render_template, abort, redirect
 from Controller.requests import select_all
-from Controller.conexao import db_connect,local
 from Model.session import *
 from Model.user import *
 from templates import *

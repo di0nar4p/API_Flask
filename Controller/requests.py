@@ -1,4 +1,4 @@
-from Controller.conexao import db_connect, local
+from Controller.conexao import db_connect, dbl_connect
 
 """ def select_all(param:str)-> None:
     query= (f'''SELECT * FROM {param}''')
@@ -8,6 +8,19 @@ from Controller.conexao import db_connect, local
     cursor.execute(query)
     registros = cursor.fetchall() """
     
+
+# Requisição de credencais
+def local():
+    access= ('SELECT * FROM credentials')
+    connlocal = dbl_connect('root', '5550123Pl@y')
+    cursor = connlocal.cursor()
+    cursor.execute(access)
+    credentials= cursor.fetchall()
+    acesso=[]
+    for credencial in credentials:
+        acesso.append(list(credencial))
+    cursor.close()
+    return acesso[0][0],acesso[0][1]
 
 
 # Requisição banco remoto
@@ -26,7 +39,8 @@ def select_all()-> list:
                 'nacionalidade':row[3],
                 'naturalidade': row[4]
                             }
-        request.append(dados) 
+        request.append(dados)
+    cursor.close() 
     return request
 
 
