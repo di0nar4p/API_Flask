@@ -1,5 +1,5 @@
 from Controller.conexao import db_connect, dbl_connect
-
+from flask import render_template
 """ def select_all(param:str)-> None:
     query= (f'''SELECT * FROM {param}''')
     conn = db_connect()
@@ -62,7 +62,8 @@ def updateId(id:int,nome:str,idade:int,nacionalidade:str,naturalidade:str)-> lis
     return request
 
 
-def login(login:str,password:str)->bool:
+def login(login,password):
+
     query= ('SELECT * FROM users')
     remote1,remote2= local()
     conn = db_connect(remote1,remote2)
@@ -80,4 +81,5 @@ def login(login:str,password:str)->bool:
             return False
 
             
- 
+""" a,b=login('root','root')
+print(type(b)) """

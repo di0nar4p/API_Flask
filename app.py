@@ -1,5 +1,5 @@
 from flask import Flask, url_for, request, jsonify, render_template, abort, redirect
-from Controller.requests import select_all
+from Controller.requests import select_all, updateId, login
 from Model.session import *
 from Model.user import *
 from templates import *
@@ -22,21 +22,20 @@ def getAll():
 
 # retorna dados pelo id
 @app.route('/dados/<int:id>', methods=['GET'])
-def getId(id):
+def getId(id)-> object:
     dados = select_all()
     for dado in dados:
         if dado.get('id') == id:
             return jsonify(dado)
         
 
-""" @app.route('/dados/<int:id>', methods=['PUT'])
-def update(id):
-    alteracao = request.get_json()
+@app.route('/dados/<int:id>/<nome>/<int:idade>/<nacionalidade>/<naturalidade>', methods=['PUT'])
+def update(id,nome,idade,nacionalidade,naturalidade) -> object:
     dados = select_all()
     for indice,dado in enumerate(dados):
         if dado.get('id') == id:
-          dados[indice].update(alteracao)
-          return jsonify(dados[indice]) """
+          updateId(id,nome,idade,nacionalidade,naturalidade)
+          return jsonify(dados[indice])
 
 
 """ @app.route('/dados',methods=['POST'])
@@ -66,27 +65,26 @@ def index():
     if request.method == 'GET':
         return render_template('index.html')
 
+
+
+
+
+
 sessao= Session()
-""" 
-@app.route('/home', methods=['GET','POST'])
+
+@app.route('/home', methods=['POST'])
 def main():
     
-    if sessao.getSession == []:
-        login = request.form['login']
-        senha = request.form['senha']
-        user = User(login,senha)
-        sessao.setSession(user)
+    mail = request.form['login']
+    senha = request.form['senha']
+    if login(mail,senha):        
+         dados= select_all()
+         user= User(mail,senha)
+         sessao.setSession(user)
+         return render_template('main.html', dados=dados)
+    
+
         
-        for usuario in sessao.session:
-            if usuario['username'] == login and usuario['password'] == senha:
-                dados= select_all(usuario['username'],usuario['password'])
-                return render_template('main.html', dados=dados)
-            elif usuario['username'] and usuario['password'] in sessao.session:
-                dados= select_all(usuario['username'],usuario['password'])
-                return render_template('main.html', dados=dados)
-    else:       
-        return redirect(url_for('index'))
-     """
     
     
 
