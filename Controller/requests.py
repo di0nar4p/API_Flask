@@ -1,5 +1,7 @@
 from Controller.conexao import db_connect, dbl_connect
 from flask import render_template
+
+
 """ def select_all(param:str)-> None:
     query= (f'''SELECT * FROM {param}''')
     conn = db_connect()
@@ -44,7 +46,7 @@ def select_all()-> list:
     cursor.close() 
     return request
 
-
+# Atualiza dados no banco remoto
 def updateId(id:int,nome:str,idade:int,nacionalidade:str,naturalidade:str)-> list:
     query= (f'''UPDATE dados SET
             nome= "{nome}",
@@ -61,7 +63,7 @@ def updateId(id:int,nome:str,idade:int,nacionalidade:str,naturalidade:str)-> lis
     cursor.close() 
     return request
 
-
+# Autenticação no banco remoto
 def login(login,password):
 
     query= ('SELECT * FROM users')
