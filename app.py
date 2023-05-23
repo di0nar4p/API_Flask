@@ -1,5 +1,5 @@
 from flask import Flask, url_for, request, jsonify, render_template, abort, redirect
-from Controller.requests import select_all, updateId, login
+from Controller.requests import insertData,select_all,deleteId, updateId, login
 from Model.session import *
 from Model.user import *
 from templates import *
@@ -28,6 +28,21 @@ def getId(id)-> object:
         if dado.get('id') == id:
             return jsonify(dado)
         
+@app.route('/dados/in/<int:id>/<nome>/<int:idade>/<nacionalidade>/<naturalidade>', methods=['GET','POST'])
+def insert(id,nome,idade,nacionalidade,naturalidade)-> object:
+    insertData(id,nome,idade,nacionalidade,naturalidade)
+    dados = select_all()
+    return jsonify(dados)
+    
+
+@app.route('/dados/del/<int:id>', methods=['GET','DELETE'])
+def delete(id)-> object:
+    deleteId(id)
+    dados = select_all()
+    return jsonify(dados)
+
+
+
 
 @app.route('/dados/<int:id>/<nome>/<int:idade>/<nacionalidade>/<naturalidade>', methods=['PUT'])
 def update(id,nome,idade,nacionalidade,naturalidade) -> object:

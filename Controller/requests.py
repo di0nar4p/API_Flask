@@ -47,7 +47,7 @@ def select_all()-> list:
     return request
 
 # Atualiza dados no banco remoto
-def updateId(id:int,nome:str,idade:int,nacionalidade:str,naturalidade:str)-> list:
+def updateId(id:int,nome:str,idade:int,nacionalidade:str,naturalidade:str)-> None:
     query= (f'''UPDATE dados SET
             nome= "{nome}",
             idade= "{idade}",
@@ -59,9 +59,38 @@ def updateId(id:int,nome:str,idade:int,nacionalidade:str,naturalidade:str)-> lis
     cursor = conn.cursor()
     cursor.execute(query)
     conn.commit()
-    request=[]
     cursor.close() 
-    return request
+    
+
+#Exclusão no banco de dados remoto
+def deleteId(id:int) -> None:
+    query = (f'''DELETE from dados WHERE id ={id}''')
+    login,password= local()
+    conn = db_connect(login,password)
+    cursor = conn.cursor()
+    cursor.execute(query)
+    conn.commit()
+    cursor.close()
+  
+#Inserção no banco de dados remoto
+def insertData(id:int,nome:str,idade:int,nacionalidade:str,naturalidade:str)-> None:
+    query= (f'''INSERT INTO dados values(
+            "{id}",
+            "{nome}",
+            "{idade}",
+            "{nacionalidade}",
+            "{naturalidade}"
+            )''')
+    login,password= local()
+    conn = db_connect(login,password)
+    cursor = conn.cursor()
+    cursor.execute(query)
+    conn.commit()
+    cursor.close() 
+
+
+
+
 
 # Autenticação no banco remoto
 def login(login,password):
