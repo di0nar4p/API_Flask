@@ -1,4 +1,4 @@
-from flask import Flask, url_for, request, jsonify, render_template, abort, redirect
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 from Controller.requests import insertData,select_all,deleteId, updateId, login
 from Model.session import *
 from Model.user import *
@@ -7,27 +7,20 @@ from templates import *
 app = Flask(__name__)
 
 
-
-
-
-
-# retorna todos os dados
-@app.route('/dados', methods=['GET'])
-def getAll():
-    dados = select_all()
-      
-    return jsonify(dados)
-    
-
-
-# retorna dados pelo id
+# Retorna dados pelo id
 @app.route('/dados/<int:id>', methods=['GET'])
 def getId(id)-> object:
     dados = select_all()
     for dado in dados:
         if dado.get('id') == id:
             return jsonify(dado)
+        else:
+            return redirect(url_for('getAll'))
+    
+
+
         
+# Create
 @app.route('/dados/in/<int:id>/<nome>/<int:idade>/<nacionalidade>/<naturalidade>', methods=['GET','POST'])
 def insert(id,nome,idade,nacionalidade,naturalidade)-> object:
     insertData(id,nome,idade,nacionalidade,naturalidade)
@@ -35,6 +28,25 @@ def insert(id,nome,idade,nacionalidade,naturalidade)-> object:
     return jsonify(dados)
     
 
+
+# Read
+@app.route('/dados', methods=['GET'])
+def getAll() -> object:
+    dados = select_all()
+      
+    return jsonify(dados)
+
+# Update 
+@app.route('/dados/<int:id>/<nome>/<int:idade>/<nacionalidade>/<naturalidade>', methods=['GET','PUT'])
+def update(id,nome,idade,nacionalidade,naturalidade) -> object:
+    dados = select_all()
+    for indice,dado in enumerate(dados):
+        if dado.get('id') == id:
+          updateId(id,nome,idade,nacionalidade,naturalidade)
+          return jsonify(dados[indice])
+        else:
+            return redirect(url_for('getAll'))
+# Delete
 @app.route('/dados/del/<int:id>', methods=['GET','DELETE'])
 def delete(id)-> object:
     deleteId(id)
@@ -43,50 +55,14 @@ def delete(id)-> object:
 
 
 
-
-@app.route('/dados/<int:id>/<nome>/<int:idade>/<nacionalidade>/<naturalidade>', methods=['PUT'])
-def update(id,nome,idade,nacionalidade,naturalidade) -> object:
-    dados = select_all()
-    for indice,dado in enumerate(dados):
-        if dado.get('id') == id:
-          updateId(id,nome,idade,nacionalidade,naturalidade)
-          return jsonify(dados[indice])
-
-
-""" @app.route('/dados',methods=['POST'])
-def include():
-    new = request.get_json()
-    dados = select_all()
-    dados.append(new)
-    return jsonify(dados) """
-    
-
-""" @app.route('/dados/<int:id>',methods=['DELETE'])
-def delete(id):
-    
-    for indice,dado in enumerate(dados):
-        if dado.get('id') == id:
-            del dados[indice]
-    
-    return jsonify(dados) """
-
-
-
-
-
-# vou alterar a lógica
+# Página inicial
 @app.route('/', methods=['GET'])
 def index():
     if request.method == 'GET':
         return render_template('index.html')
 
 
-
-
-
-
-sessao= Session()
-
+# Usuário login
 @app.route('/home', methods=['POST'])
 def main():
     
@@ -94,23 +70,17 @@ def main():
     senha = request.form['senha']
     if login(mail,senha):        
          dados= select_all()
-         user= User(mail,senha)
-         sessao.setSession(user)
          return render_template('main.html', dados=dados)
-    
+    else:
+        return redirect(url_for('index'))
 
-        
-    
-    
-
-# logout da api, vai ser alterado também
-@app.route('/logout')
-def logout():
-    sessao.clear()
-    return jsonify(sessao['username'])        
+      
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
 
 
     
+
+
+
