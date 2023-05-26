@@ -1,14 +1,6 @@
 from Controller.conexao import db_connect, dbl_connect
 from flask import render_template
 
-
-""" def select_all(param:str)-> None:
-    query= (f'''SELECT * FROM {param}''')
-    conn = db_connect()
-    cursor = conn.cursor()
-
-    cursor.execute(query)
-    registros = cursor.fetchall() """
     
 
 # Requisição de credencais
@@ -91,7 +83,6 @@ def insertData(id:int,nome:str,idade:int,nacionalidade:str,naturalidade:str)-> N
 
 
 
-
 # Autenticação no banco remoto
 def login(login,password):
 
@@ -112,5 +103,3 @@ def login(login,password):
             return False
 
             
-""" a,b=login('root','root')
-print(type(b)) """
