@@ -6,7 +6,7 @@ from flask import render_template
 # Requisição de credencais
 def local():
     access= ('SELECT * FROM credentials')
-    connlocal = dbl_connect('root', '5550123Pl@y')
+    connlocal = dbl_connect('root', '5553Pl@y')
     cursor = connlocal.cursor()
     cursor.execute(access)
     credentials= cursor.fetchall()
